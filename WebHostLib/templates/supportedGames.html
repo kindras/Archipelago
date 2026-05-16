@@ -23,6 +23,7 @@
         #games .collapse-toggle{
           cursor: unset;
         }
+
     </style>
     </noscript>
 {% endblock %}
@@ -47,9 +48,21 @@
         {% for game_name in worlds | title_sorted %}
         {% set world = worlds[game_name] %}
         <details data-game="{{ game_name }}">
-            <summary class="h2">{{ game_name }}</summary>
-            {{ world.__doc__ | default("No description provided.", true) }}<br />
-            <a href="{{ url_for("game_info", game=game_name, lang="en") }}">Game Page</a>
+	    <summary class="h2">
+		    {{ game_name }}
+	            {% if world.zip_path %}
+		    <span class="badge">{{ world.world_version.as_simple_string() }}</span>
+	            {% endif %}
+	    </summary>
+	    
+
+	    <pre>
+	    {% for key, value in world.__dict__.items() %}
+                {{ key }}: {{ value }}
+            {% endfor %}
+	    </pre>
+	    {{ world.__doc__ | default("No description provided.", true) }}<br />
+	    <a href="{{ url_for("game_info", game=game_name, lang="en") }}">Game Page</a>
             {% if world.web.tutorials %}
             <span class="link-spacer">|</span>
             <a href="{{ url_for("tutorial_landing", _anchor = game_name | urlencode) }}">Setup Guides</a>

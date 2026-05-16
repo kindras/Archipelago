@@ -42,3 +42,14 @@
 #games .page-controls button{
     margin-left: 0.5rem;
 }
+
+.badge {
+  background-color: #418431;
+  color: white;
+  vertical-align: center;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
